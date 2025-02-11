@@ -1,3 +1,4 @@
+import os
 import time
 
 import requests
@@ -8,6 +9,8 @@ from rest_framework.views import APIView
 
 from authentication.auth import ExpiringTokenAuthentication
 
+LATENCY_CHECK_URL = os.getenv("LATENCY_CHECK_URL")
+print("LATENCY_CHECK_URL", LATENCY_CHECK_URL)
 URL = "https://ya.ru"
 
 
