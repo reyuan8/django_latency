@@ -10,8 +10,6 @@ from rest_framework.views import APIView
 from authentication.auth import ExpiringTokenAuthentication
 
 LATENCY_CHECK_URL = os.getenv("LATENCY_CHECK_URL")
-print("LATENCY_CHECK_URL", LATENCY_CHECK_URL)
-URL = "https://ya.ru"
 
 
 class LatencyView(APIView):
@@ -21,11 +19,11 @@ class LatencyView(APIView):
     def get(self, request):
         start_time = time.time()
         try:
-            response = requests.get(URL, timeout=5)
+            response = requests.get(LATENCY_CHECK_URL, timeout=5)
             response.raise_for_status()
         except requests.RequestException:
             return Response(
-                {"error": f"Unable to reach {URL}"},
+                {"error": f"Unable to reach {LATENCY_CHECK_URL}"},
                 status=status.HTTP_503_SERVICE_UNAVAILABLE,
             )
         end_time = time.time()
