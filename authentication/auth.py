@@ -13,7 +13,7 @@ class ExpiringTokenAuthentication(authentication.BaseAuthentication):
         token_key = auth_header.split(" ")[1]
         try:
             token = Token.objects.get(key=token_key)
-        except Token.DoesNotExist:
+        except:
             raise exceptions.AuthenticationFailed("Invalid token")
 
         if token.is_expired:
